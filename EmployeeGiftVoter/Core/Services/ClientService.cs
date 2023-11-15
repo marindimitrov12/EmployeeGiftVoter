@@ -22,18 +22,27 @@ namespace Core.Services
         }
         public async Task<EventResponseDto> StartEvent(CreateEvetDto dto)
         {
+            var ev = await _context.Events.FirstOrDefaultAsync(x=>x.BirthdayBoyId==dto.BirthdayBoyId);
 
-            await _context.Events.AddAsync(new Event { StartDate = dto.StartDate, InitiatorId = dto.InitiatorId,BirthdayBoyId =dto.BirthdayBoyId,EndDate=null});
-            await _context.SaveChangesAsync();
-            return new EventResponseDto()
+            if (ev==null)
             {
-                StartDate=dto.StartDate.ToString(),
-                EndDate=dto.EndDate,
-                BirthdayBoyId=dto.BirthdayBoyId,
-                InitiatorId=dto.InitiatorId,
-                
+                await _context.Events.AddAsync(new Event { StartDate = dto.StartDate, InitiatorId = dto.InitiatorId, BirthdayBoyId = dto.BirthdayBoyId, EndDate = null });
+                await _context.SaveChangesAsync();
+                return new EventResponseDto()
+                {
+                    StartDate = dto.StartDate.ToString(),
+                    EndDate = dto.EndDate,
+                    BirthdayBoyId = dto.BirthdayBoyId,
+                    InitiatorId = dto.InitiatorId,
 
-            };
+
+                };
+            }
+            else
+            {
+                throw new Exception("The event for this user is already started!!!");
+            }
+            
             
         }
 
@@ -113,6 +122,56 @@ namespace Core.Services
                 });
             }
             return result;
+        }
+
+        public async Task<VoteResponseDto> Vote(CreateVoteDto vote)
+        {
+            var result = await _context.EventResults.FirstOrDefaultAsync(x=>x.VoterId==vote.VoterId);
+            var ev = await _context.Events.FirstOrDefaultAsync(x=>x.Id==vote.EventId);
+            var birthDayBoy = await _context.Events.FirstOrDefaultAsync(x => x.BirthdayBoyId == ev.BirthdayBoyId);
+            if (birthDayBoy.BirthdayBoyId==vote.VoterId) 
+            {
+                throw new Exception("The BirthDay boy cant vote!!!");
+            }
+            if (result==null)
+            {
+                await _context.EventResults.AddAsync(new EventResult
+                { GiftId = vote.GiftId, EventId = vote.EventId, VoterId = vote.VoterId });
+                await _context.SaveChangesAsync();
+                return new VoteResponseDto
+                {
+                    EventId = vote.EventId,
+                    VoterId = vote.VoterId,
+                    GiftId = vote.GiftId
+                };
+            }
+            else
+            {
+                throw new Exception("You can vote just Once!");
+            }
+           
+           
+        }
+
+        public async Task<CloseEventDto> CloseEvent(CloseEventDto dto)
+        {
+            
+            var editedEntity = await _context.Events.FirstOrDefaultAsync(x=>x.Id==dto.EventId&&x.InitiatorId==dto.EmployeeId);
+            if (editedEntity!=null)
+            {
+                editedEntity.EndDate = DateTime.Now;
+                await _context.SaveChangesAsync();
+                return new CloseEventDto
+                {
+                    EndDate = editedEntity.EndDate.ToString(),
+                    EventId = dto.EventId,
+                };
+            }
+            else
+            {
+                throw new Exception("Specified event doent exist!!!");
+            }
+            
         }
     }
 }

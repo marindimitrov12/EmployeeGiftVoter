@@ -23,7 +23,7 @@ namespace Api.Controllers
             catch (Exception)
             {
 
-                return BadRequest();
+                return BadRequest(new {message="The event for this user is alredy started!"});
             }
             return Ok(result);
 
@@ -40,6 +40,38 @@ namespace Api.Controllers
             {
                 return BadRequest();
                 
+            }
+            return Ok(result);
+        }
+        [HttpPost("vote")]
+        [ProducesResponseType(typeof(VoteResponseDto),StatusCodes.Status200OK)]
+        public async Task<IActionResult> Vote(CreateVoteDto vote)
+        {
+            var result=new VoteResponseDto();
+            try
+            {
+                result = await _clientService.Vote(vote);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message=ex.Message });
+                
+            }
+            return Ok(result);
+        }
+        [HttpPut("closeEvent")]
+        [ProducesResponseType(typeof(CloseEventDto),StatusCodes.Status200OK)]
+        public async Task<IActionResult> CloseEvent(CloseEventDto dto)
+        {
+            var result = new CloseEventDto();
+            try
+            {
+                result = await _clientService.CloseEvent(dto);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
             }
             return Ok(result);
         }

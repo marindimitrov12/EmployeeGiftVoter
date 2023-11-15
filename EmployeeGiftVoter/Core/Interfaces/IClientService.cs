@@ -12,7 +12,9 @@ namespace Core.Interfaces
         Task <EventResponseDto>StartEvent(CreateEvetDto dto);
         Task<List<EventResponseDto>> GetAllEvents(int bdayBoyId);
         Task<ClientResponseDto>Login(LogInClientDto user);
-        Task<ClientResponseDto> Register(RegisterClientDto user); 
+        Task<ClientResponseDto> Register(RegisterClientDto user);
+        Task<VoteResponseDto> Vote(CreateVoteDto vote);
+        Task<CloseEventDto>CloseEvent(CloseEventDto dto);
         
     }
 }
