@@ -8,9 +8,10 @@ namespace Core.Dtos
 {
     public class CreateEvetDto
     {
-        public int Id { get; set; }
+        
 
         public DateTime StartDate { get; set; } = DateTime.Now;
+        public string EndDate { get; set; } 
         public  int  InitiatorId { get; set; }
 
         public int BirthdayBoyId { get; set; }

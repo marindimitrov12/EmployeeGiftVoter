@@ -9,8 +9,10 @@ namespace Core.Interfaces
 {
     public interface IClientService
     {
-        Task CreateEvent(CreateEvetDto dto);
+        Task <EventResponseDto>StartEvent(CreateEvetDto dto);
+        Task<List<EventResponseDto>> GetAllEvents(int bdayBoyId);
         Task<ClientResponseDto>Login(LogInClientDto user);
-        Task<ClientResponseDto> Register(RegisterClientDto user);   
+        Task<ClientResponseDto> Register(RegisterClientDto user); 
+        
     }
 }

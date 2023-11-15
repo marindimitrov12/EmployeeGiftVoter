@@ -18,6 +18,7 @@ namespace Api.Controllers
             this._clientService = clientService;
             this._configuration = configuration;
         }
+        
         [HttpPost("login")]
         [ProducesResponseType(typeof(ClientResponseDto),StatusCodes.Status200OK)]
         public async Task<IActionResult> Login(LogInClientDto user)

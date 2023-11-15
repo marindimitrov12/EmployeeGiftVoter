@@ -11,7 +11,7 @@ namespace Core.Dtos
         public string StartDate { get; set; }
         public int InitiatorId { get; set; }
         public int BirthdayBoyId { get; set; }
-        
+        public string EndDate { get; set; }
         public List<EventResultDto> Results { get; set; }
     }
 }

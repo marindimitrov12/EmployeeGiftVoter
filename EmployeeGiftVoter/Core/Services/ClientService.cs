@@ -3,6 +3,7 @@ using Core.Interfaces;
 using Data;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,20 @@ namespace Core.Services
         {
             this._context = context;
         }
-        public async Task CreateEvent(CreateEvetDto dto)
+        public async Task<EventResponseDto> StartEvent(CreateEvetDto dto)
         {
 
-             await _context.Events.AddAsync(new Event { StartDate = DateTime.Now, InitiatorId = dto.InitiatorId,BirthdayBoyId =dto.BirthdayBoyId});
+            await _context.Events.AddAsync(new Event { StartDate = dto.StartDate, InitiatorId = dto.InitiatorId,BirthdayBoyId =dto.BirthdayBoyId,EndDate=null});
             await _context.SaveChangesAsync();
+            return new EventResponseDto()
+            {
+                StartDate=dto.StartDate.ToString(),
+                EndDate=dto.EndDate,
+                BirthdayBoyId=dto.BirthdayBoyId,
+                InitiatorId=dto.InitiatorId,
+                
+
+            };
             
         }
 
@@ -83,6 +93,26 @@ namespace Core.Services
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
             }
+        }
+
+        public async Task<List<EventResponseDto>> GetAllEvents(int bdayBoyId)
+        {
+            var events = await _context.Events.Where(x=>x.BirthdayBoyId!=bdayBoyId).ToListAsync();
+            var result = new List<EventResponseDto>();
+            foreach (var item in events)
+            {
+                result.Add(new EventResponseDto
+                {
+                    StartDate=item.StartDate.ToString(),
+                    BirthdayBoyId=item.BirthdayBoyId,
+                    EndDate=item.EndDate.ToString(),
+                    InitiatorId=item.InitiatorId,
+                    
+
+
+                });
+            }
+            return result;
         }
     }
 }

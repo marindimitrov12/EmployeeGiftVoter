@@ -11,6 +11,7 @@ namespace Data.Models
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public int InitiatorId { get; set; }
         public Employee Initiator { get; set; }
         public int BirthdayBoyId { get; set; }
