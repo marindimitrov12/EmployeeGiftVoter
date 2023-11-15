@@ -11,7 +11,9 @@ namespace Data.Models
         public int Id { get; set; }
         public string EmployeeName { get;set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public byte[] PasswordHash { get; set; }
+
+        public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirt { get; set; }
         public List<Event> Events { get; set; }
     }
