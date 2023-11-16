@@ -24,7 +24,7 @@ namespace Core.Services
         {
             var ev = await _context.Events.FirstOrDefaultAsync(x=>x.BirthdayBoyId==dto.BirthdayBoyId);
 
-            if (ev==null)
+            if (ev==null||ev.StartDate.Year+1==dto.StartDate.Year)
             {
                 await _context.Events.AddAsync(new Event { StartDate = dto.StartDate, InitiatorId = dto.InitiatorId, BirthdayBoyId = dto.BirthdayBoyId, EndDate = null });
                 await _context.SaveChangesAsync();
