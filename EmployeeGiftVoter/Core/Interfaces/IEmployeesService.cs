@@ -10,5 +10,6 @@ namespace Core.Interfaces
     public interface IEmployeesService
     {
         Task<List<ClientResponseDto>> GetAll();
+        Task<List<GiftDto>> GetAllGifts();
     }
 }

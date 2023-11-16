@@ -8,6 +8,7 @@ namespace Core.Dtos
 {
     public class EventResponseDto
     {
+        public  int EventId { get; set; }
         public string StartDate { get; set; }
         public int InitiatorId { get; set; }
         public int BirthdayBoyId { get; set; }

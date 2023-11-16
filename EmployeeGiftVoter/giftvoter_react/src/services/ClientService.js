@@ -24,3 +24,28 @@ export const getAllEvents=async(id)=>{
     });
     return await response.json();
 }
+export const getAllGifts=async ()=>{
+    const response=await fetch(`${baseUrl}getAllGifts`,{
+        method:'GET'
+    });
+    return await response.json();
+}
+export const vote=async (eventId,giftId,voterId)=>{
+    const response=await fetch(`${baseUrl}vote?EventId=${eventId}&GiftId=${giftId}&VoterId=${voterId}`,{
+        method:'POST'
+    });
+    return await response.json();
+}
+export const getResult=async (eventId,personId)=>{
+    const response=await fetch(`${baseUrl}getResult?EventId=${eventId}&PersonId=${personId}`,{
+        method:'GET'
+    });
+    return await response.json();
+
+}
+export const trackVoting=async (eventId,personId)=>{
+    const response=await fetch(`${baseUrl}trackVoting?EventId=${eventId}&PersonId=${personId}`,{
+        method:'GET'
+    });
+    return await response.json();
+}

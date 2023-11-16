@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 export default function Event(props){
     return(<>
     <div className="col mb-5">
@@ -20,8 +20,8 @@ export default function Event(props){
                              
                          </div>
                          <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                             {props.EndDate!==''&&<div className="text-center"><button className="btn btn-outline-dark mt-auto"  >Check Results </button></div>}
-                             {props.EndDate===''&&<div className="text-center"><button className="btn btn-outline-dark mt-auto"  >Vote </button></div>}
+                             {props.EndDate!==''&&<div className="text-center"><Link className="btn btn-outline-dark mt-auto" to={`/eventResultsPage/${props.Id}`} >Check Results </Link></div>}
+                             {props.EndDate===''&&<div className="text-center"><Link className="btn btn-outline-dark mt-auto"to={`/eventVotePage/${props.Id}`} >Vote </Link></div>}
                          </div>
                    
                        

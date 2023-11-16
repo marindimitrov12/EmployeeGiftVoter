@@ -23,7 +23,8 @@ export default function EventPage(){
                     BirthDayBoyName={e.birthdayBoyName}
                     StartDate={e.startDate}
                     EndDate={e.endDate}
-                    key={e.birthdayBoyName}/>)}
+                    Id={e.eventId}
+                    key={e.eventId}/>)}
                    
                    
                 </div>

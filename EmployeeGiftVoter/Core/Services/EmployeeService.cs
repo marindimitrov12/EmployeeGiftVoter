@@ -34,5 +34,20 @@ namespace Core.Services
             }
             return result;
         }
+
+        public async Task<List<GiftDto>> GetAllGifts()
+        {
+            var gifts=await _context.Gifts.ToListAsync();
+            var result=new List<GiftDto>();
+            foreach (var item in gifts)
+            {
+                result.Add(new GiftDto
+                {
+                    Id=item.Id,
+                    Name=item.GiftName
+                });
+            }
+            return result;
+        }
     }
 }

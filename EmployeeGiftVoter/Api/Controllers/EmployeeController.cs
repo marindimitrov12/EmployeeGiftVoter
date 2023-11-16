@@ -27,5 +27,21 @@ namespace Api.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("getAllGifts")]
+        [ProducesResponseType(typeof(List<GiftDto>),StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllGifts()
+        {
+            var result= new List<GiftDto>();
+            try
+            {
+                result = await _employeesService.GetAllGifts();
+            }
+            catch (Exception)
+            {
+
+                BadRequest();
+            }
+            return Ok(result);
+        }
     }
 }

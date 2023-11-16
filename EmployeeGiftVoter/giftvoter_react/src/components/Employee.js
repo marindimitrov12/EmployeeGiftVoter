@@ -14,8 +14,14 @@ export default function Employee(props){
     const handleClick=async ()=>{
        startEvent(currentDate,user.id,props.Id)
        .then((res)=>{
+        console.log(res.message);
+        if(res.message!==undefined){
+            setError(res.message)
+
+        }else{
+            setError("Event Started!")
+        }
         
-        setError(res.message)
        });
     }
     return(<>

@@ -113,6 +113,7 @@ namespace Core.Services
             {
                 result.Add(new EventResponseDto
                 {
+                    EventId=item.Id,
                     StartDate=item.StartDate.ToString(),
                     BirthdayBoyId=item.BirthdayBoyId,
                     EndDate=item.EndDate.ToString(),
@@ -127,14 +128,16 @@ namespace Core.Services
 
         public async Task<VoteResponseDto> Vote(CreateVoteDto vote)
         {
-            var result = await _context.EventResults.FirstOrDefaultAsync(x=>x.VoterId==vote.VoterId);
+            var result = await _context.EventResults.Where(x=>x.EventId==vote.EventId)
+                .Select(x => x.VoterId)
+                .ToListAsync();
             var ev = await _context.Events.FirstOrDefaultAsync(x=>x.Id==vote.EventId);
             var birthDayBoy = await _context.Events.FirstOrDefaultAsync(x => x.BirthdayBoyId == ev.BirthdayBoyId);
             if (birthDayBoy.BirthdayBoyId==vote.VoterId) 
             {
                 throw new Exception("The BirthDay boy cant vote!!!");
             }
-            if (result==null)
+            if (!result.Contains(vote.VoterId))
             {
                 await _context.EventResults.AddAsync(new EventResult
                 { GiftId = vote.GiftId, EventId = vote.EventId, VoterId = vote.VoterId });

@@ -6,6 +6,9 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import Layout from './components/Layout';
 import EventPage from './pages/EventPage';
+import EventVotePage from './pages/EventVotePage';
+import EventResultsPage from './pages/EventResultsPage';
+import TrackVotingPage from './pages/TrackVotingPage';
 function App() {
   return (
     <UserProvider>
@@ -15,6 +18,9 @@ function App() {
     <Route index element={<Login/>}/>
     <Route path="/homePage"element={<HomePage/>}/>
     <Route path="/eventPage"element={<EventPage/>}/>
+    <Route path="/eventVotePage/:id"element={<EventVotePage/>}/>
+    <Route path="/eventResultsPage/:id"element={<EventResultsPage/>}/>
+    <Route path="/trackVotingPage/:id"element={<TrackVotingPage/>}/>
     </Route>
    </Routes>
    </BrowserRouter>
