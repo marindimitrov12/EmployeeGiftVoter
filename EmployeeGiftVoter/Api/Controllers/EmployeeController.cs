@@ -43,5 +43,21 @@ namespace Api.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("getMyEvents")]
+        [ProducesResponseType(typeof(List<EventResponseDto>),StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetMyEvents(int id)
+        {
+            var result=new List<EventResponseDto>();
+            try
+            {
+                result = await _employeesService.GetMyEvents(id);
+            }
+            catch (Exception)
+            {
+
+                BadRequest();
+            }
+            return Ok(result);
+        }
     }
 }

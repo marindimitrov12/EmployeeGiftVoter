@@ -11,5 +11,6 @@ namespace Core.Interfaces
     {
         Task<List<ClientResponseDto>> GetAll();
         Task<List<GiftDto>> GetAllGifts();
+        Task<List<EventResponseDto>> GetMyEvents(int id);
     }
 }

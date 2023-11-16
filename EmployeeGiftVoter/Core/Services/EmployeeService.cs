@@ -49,5 +49,29 @@ namespace Core.Services
             }
             return result;
         }
+
+        public async Task<List<EventResponseDto>> GetMyEvents(int id)
+        {
+            var myEvents = await _context.Events
+                .Include(x=>x.Initiator)
+                .Include(x=>x.BirthdayBoy)
+                .Where(x => x.InitiatorId == id)
+                .ToListAsync();
+            var result = new List<EventResponseDto>();
+            foreach (var item in myEvents)
+            {
+                result.Add(new EventResponseDto
+                {
+                    StartDate = item.StartDate.ToString(),
+                    BirthdayBoyId = item.BirthdayBoyId,
+                    BirthdayBoyName = item.BirthdayBoy.EmployeeName,
+                    EndDate = item.EndDate.ToString(),
+                    EventId=item.Id,
+                    InitiatorId=item.Initiator.Id,
+                    
+                }) ;
+            }
+            return result;
+        }
     }
 }

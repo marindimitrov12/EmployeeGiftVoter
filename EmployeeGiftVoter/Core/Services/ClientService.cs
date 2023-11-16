@@ -161,7 +161,7 @@ namespace Core.Services
         {
             
             var editedEntity = await _context.Events.FirstOrDefaultAsync(x=>x.Id==dto.EventId&&x.InitiatorId==dto.EmployeeId);
-            if (editedEntity!=null)
+            if (editedEntity!=null&&editedEntity.EndDate==null)
             {
                 editedEntity.EndDate = DateTime.Now;
                 await _context.SaveChangesAsync();
@@ -173,7 +173,7 @@ namespace Core.Services
             }
             else
             {
-                throw new Exception("Specified event doent exist!!!");
+                throw new Exception("Specified event doent exist or event is alredy closed!!!");
             }
             
         }

@@ -49,3 +49,15 @@ export const trackVoting=async (eventId,personId)=>{
     });
     return await response.json();
 }
+export const getMyEvents=async(id)=>{
+    const result=await fetch(`${baseUrl}getMyEvents?id=${id}`,{
+        method:'GET'
+    });
+    return await result.json();
+}
+export const closeEvent=async(eventId,personId)=>{
+ const response=await fetch(`${baseUrl}closeEvent?EventId=${eventId}&EmployeeId=${personId}`,{
+    method:'PUT'
+ });
+ return await response.json();
+}
