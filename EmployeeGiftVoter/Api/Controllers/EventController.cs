@@ -75,5 +75,39 @@ namespace Api.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("getResult")]
+        [ProducesResponseType(typeof(List<ResultDto>),StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetResult(ResultRequestDto result)
+        {
+            var res = new List<ResultDto>();
+            try
+            {
+                res = await _clientService.GetResults(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { message=ex.Message});
+            }
+            return Ok(res);
+
+        }
+        [HttpGet("trackVoting")]
+        [ProducesResponseType(typeof(List<TrackVotingDto>),StatusCodes.Status200OK)]
+        public async Task<IActionResult> TrackVoting(ResultRequestDto result)
+        {
+            var res = new List<TrackVotingDto>();
+            try
+            {
+                res = await _clientService.TrackVoting(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { message=ex.Message});
+            }
+            return Ok(res);
+
+        }
     }
 }

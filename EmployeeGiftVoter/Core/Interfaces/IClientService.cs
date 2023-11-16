@@ -15,6 +15,8 @@ namespace Core.Interfaces
         Task<ClientResponseDto> Register(RegisterClientDto user);
         Task<VoteResponseDto> Vote(CreateVoteDto vote);
         Task<CloseEventDto>CloseEvent(CloseEventDto dto);
+        Task<List<ResultDto>> GetResults(ResultRequestDto result);
+        Task<List<TrackVotingDto>>TrackVoting(ResultRequestDto result);
         
     }
 }

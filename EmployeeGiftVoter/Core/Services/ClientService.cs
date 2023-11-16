@@ -173,5 +173,73 @@ namespace Core.Services
             }
             
         }
+
+        public async Task<List<ResultDto>> GetResults(ResultRequestDto result)
+        {
+            var gifts=await _context.Gifts.ToListAsync();
+            var ev = await _context.Events.Include(x=>x.Results).FirstOrDefaultAsync(x=>x.Id==result.EventId);
+            if (ev.EndDate==null) 
+            {
+                throw new Exception("Event still open!");
+            }
+            if (ev.BirthdayBoyId==result.PersonId) 
+            {
+                throw new Exception("You can't see this results!");
+            }
+            var resultDic=new Dictionary<string, int>();
+            foreach (var gift in gifts) 
+            {
+                resultDic.Add(gift.GiftName,0);
+            }
+            foreach (var item in ev.Results)
+            {
+                resultDic[item.Gift.GiftName] += 1;
+            }
+            resultDic.OrderByDescending(x=>x.Value);
+            var endResult = new List<ResultDto>();
+            foreach (var item in resultDic)
+            {
+                endResult.Add(new ResultDto 
+                { 
+                    GiftName=item.Key,
+                    Count=item.Value,
+                   
+                    
+                });
+            }
+            return endResult;
+        }
+
+        public async  Task<List<TrackVotingDto>> TrackVoting(ResultRequestDto result)
+        {
+            var ev = await _context.Events.Include(x => x.Results).ThenInclude(x=>x.Gift).FirstOrDefaultAsync(x => x.Id == result.EventId);
+            var allEmp = await _context.Employees.ToListAsync();
+            var res = new List<TrackVotingDto>();
+            if (ev.BirthdayBoyId==result.PersonId)
+            {
+                throw new Exception("You can't see this results!");
+            }
+            foreach (var item in allEmp)
+            {
+                if (ev.Results.FirstOrDefault(x=>x.VoterId==item.Id)!=null)
+                {
+                    res.Add(new TrackVotingDto
+                    {
+                        VoterName = ev.Results.FirstOrDefault(x => x.VoterId == item.Id).Voter.EmployeeName,
+                        GiftVoted = ev.Results.FirstOrDefault(x => x.VoterId == item.Id).Gift.GiftName,
+                    });
+                }
+                else
+                {
+                    res.Add(new TrackVotingDto
+                    {
+                        VoterName = item.EmployeeName,
+                        GiftVoted = null
+                    });
+                }
+            }
+            return res;
+
+        }
     }
 }
