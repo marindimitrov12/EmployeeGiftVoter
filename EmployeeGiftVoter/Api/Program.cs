@@ -30,7 +30,7 @@ namespace Api
             });
             builder.Services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
             builder.Services.AddTransient<IClientService, ClientService>();
-            
+            builder.Services.AddTransient<IEmployeesService, EmployeeService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

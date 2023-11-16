@@ -8,6 +8,8 @@ namespace Core.Dtos
 {
     public class ClientResponseDto
     {
+        public int Id { get; set; }
+        public string Role { get; set; } = "Employee";
         public string EmployeeName { get; set; }
         public string Username { get; set; }
         public string DateOfBirt { get; set; }

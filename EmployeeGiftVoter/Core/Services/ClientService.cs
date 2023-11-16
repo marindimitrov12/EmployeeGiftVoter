@@ -59,6 +59,7 @@ namespace Core.Services
             }
             return new ClientResponseDto
             {
+                Id = client.Id,
                 DateOfBirt = client.DateOfBirt.ToString(),
                 EmployeeName = client.EmployeeName,
                 Username = user.UserName,
@@ -106,7 +107,7 @@ namespace Core.Services
 
         public async Task<List<EventResponseDto>> GetAllEvents(int bdayBoyId)
         {
-            var events = await _context.Events.Where(x=>x.BirthdayBoyId!=bdayBoyId).ToListAsync();
+            var events = await _context.Events.Include(x=>x.BirthdayBoy).Where(x=>x.BirthdayBoyId!=bdayBoyId).ToListAsync();
             var result = new List<EventResponseDto>();
             foreach (var item in events)
             {
@@ -116,7 +117,7 @@ namespace Core.Services
                     BirthdayBoyId=item.BirthdayBoyId,
                     EndDate=item.EndDate.ToString(),
                     InitiatorId=item.InitiatorId,
-                    
+                    BirthdayBoyName=item.BirthdayBoy.EmployeeName
 
 
                 });
