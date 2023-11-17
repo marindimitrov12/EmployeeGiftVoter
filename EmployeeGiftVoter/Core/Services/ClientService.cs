@@ -22,9 +22,9 @@ namespace Core.Services
         }
         public async Task<EventResponseDto> StartEvent(CreateEvetDto dto)
         {
-            var ev = await _context.Events.FirstOrDefaultAsync(x=>x.BirthdayBoyId==dto.BirthdayBoyId);
+            var ev = await _context.Events.OrderByDescending(x=>x.StartDate).FirstOrDefaultAsync(x=>x.BirthdayBoyId==dto.BirthdayBoyId);
 
-            if (ev==null||ev.StartDate.Year+1==dto.StartDate.Year)
+            if (ev==null||ev.StartDate.Year+1<=dto.StartDate.Year)
             {
                 await _context.Events.AddAsync(new Event { StartDate = dto.StartDate, InitiatorId = dto.InitiatorId, BirthdayBoyId = dto.BirthdayBoyId, EndDate = null });
                 await _context.SaveChangesAsync();
