@@ -24,6 +24,7 @@ export default function EventPage(){
                     BirthDayBoyName={e.birthdayBoyName}
                     StartDate={e.startDate}
                     EndDate={e.endDate}
+                    ImgUrl={e.imgUrl}
                     Id={e.eventId}
                     key={e.eventId}/>)}
                    

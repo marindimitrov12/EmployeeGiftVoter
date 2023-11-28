@@ -118,7 +118,8 @@ namespace Core.Services
                     BirthdayBoyId=item.BirthdayBoyId,
                     EndDate=item.EndDate.ToString(),
                     InitiatorId=item.InitiatorId,
-                    BirthdayBoyName=item.BirthdayBoy.EmployeeName
+                    BirthdayBoyName=item.BirthdayBoy.EmployeeName,
+                    ImgUrl=item.BirthdayBoy.ImgUrl,
 
 
                 });
@@ -181,6 +182,7 @@ namespace Core.Services
         public async Task<List<ResultDto>> GetResults(ResultRequestDto result)
         {
             var gifts=await _context.Gifts.ToListAsync();
+            var imgs = new List<string>();
             var ev = await _context.Events.Include(x=>x.Results).FirstOrDefaultAsync(x=>x.Id==result.EventId);
             if (ev.EndDate==null) 
             {
@@ -194,6 +196,7 @@ namespace Core.Services
             foreach (var gift in gifts) 
             {
                 resultDic.Add(gift.GiftName,0);
+                imgs.Add(gift.ImgUrl);
             }
             foreach (var item in ev.Results)
             {
@@ -207,9 +210,10 @@ namespace Core.Services
                 { 
                     GiftName=item.Key,
                     Count=item.Value,
-                   
+                   ImgUrl=imgs.FirstOrDefault(),
                     
                 });
+                imgs.RemoveAt(0);
             }
             return endResult;
         }
@@ -231,6 +235,7 @@ namespace Core.Services
                     {
                         VoterName = ev.Results.FirstOrDefault(x => x.VoterId == item.Id).Voter.EmployeeName,
                         GiftVoted = ev.Results.FirstOrDefault(x => x.VoterId == item.Id).Gift.GiftName,
+                        ImgUrl=item.ImgUrl,
                     });
                 }
                 else
@@ -238,7 +243,9 @@ namespace Core.Services
                     res.Add(new TrackVotingDto
                     {
                         VoterName = item.EmployeeName,
-                        GiftVoted = null
+                        GiftVoted = null,
+                        ImgUrl=item.ImgUrl
+                        
                     });
                 }
             }

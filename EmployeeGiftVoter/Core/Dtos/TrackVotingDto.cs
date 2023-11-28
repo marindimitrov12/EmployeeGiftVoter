@@ -10,5 +10,6 @@ namespace Core.Dtos
     {
         public string VoterName { get; set; }
         public string  GiftVoted { get; set; }
+        public string ImgUrl { get; set; }
     }
 }

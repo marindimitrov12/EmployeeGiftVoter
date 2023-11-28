@@ -24,6 +24,7 @@ export default function EventVotePage(){
                     Name={g.name}
                     Id={g.id}
                     EventId={id}
+                    ImgUrl={g.imgUrl}
                     key={g.id}/>)}
                    
                    

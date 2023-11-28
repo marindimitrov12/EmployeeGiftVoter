@@ -10,7 +10,8 @@ namespace Core.Dtos
     {
         public string GiftName { get; set; }
         public int Count { get; set; }
+        public string ImgUrl { get; set; }
 
-       
+
     }
 }

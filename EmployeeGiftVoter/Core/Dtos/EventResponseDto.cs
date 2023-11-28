@@ -15,5 +15,7 @@ namespace Core.Dtos
         public  string BirthdayBoyName { get; set; }
         public string EndDate { get; set; }
         public List<EventResultDto> Results { get; set; }
+
+        public string ImgUrl { get; set; }
     }
 }

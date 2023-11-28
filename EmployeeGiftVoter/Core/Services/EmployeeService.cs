@@ -45,7 +45,8 @@ namespace Core.Services
                 result.Add(new GiftDto
                 {
                     Id=item.Id,
-                    Name=item.GiftName
+                    Name=item.GiftName,
+                    ImgUrl = item.ImgUrl
                 });
             }
             return result;

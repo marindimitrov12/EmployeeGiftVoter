@@ -28,6 +28,7 @@ export default function TrackVotingPage(){
                     {details===null?<h1>Loading...</h1>:details.map(d=><VoteRecord 
                     VoterName={d.voterName}
                     GiftVoted={d.giftVoted}
+                    ImgUrl={d.imgUrl}
                     
                     key={d.giftVoted}/>)}
                    

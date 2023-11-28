@@ -5,7 +5,7 @@ export default function Result(props){
      <div className="col mb-5">
     <div className="card h-100">
                          
-                         <img className="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                         <img className="card-img-top" src={props.ImgUrl} alt="..." />
                         
                          <div className="card-body p-4">
                              <div className="text-center">

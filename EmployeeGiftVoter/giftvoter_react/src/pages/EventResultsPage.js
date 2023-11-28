@@ -27,6 +27,7 @@ export default function EventResultsPage(){
                     {results===null?<h1>Loading...</h1>:results.map(r=><Result 
                     Name={r.giftName}
                     Count={r.count}
+                    ImgUrl={r.imgUrl}
                     
                     key={r.giftName}/>)}
                    
