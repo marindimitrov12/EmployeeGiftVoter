@@ -10,7 +10,8 @@ namespace Data.Models
     {
         public int Id { get; set; }
         public string GiftName { get; set; }
+        public  string  ImgUrl { get; set; }
 
-        
+
     }
 }

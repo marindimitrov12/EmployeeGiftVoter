@@ -29,6 +29,7 @@ namespace Core.Services
                     EmployeeName=item.EmployeeName,
                     DateOfBirt=item.DateOfBirt.ToString(),
                     Username=item.Username,
+                    ImgUrl=item.ImgUrl,
                     
                 });
             }

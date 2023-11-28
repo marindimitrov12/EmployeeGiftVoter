@@ -16,5 +16,6 @@ namespace Data.Models
         public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirt { get; set; }
         public List<Event> Events { get; set; }
+        public string ImgUrl { get; set; }
     }
 }

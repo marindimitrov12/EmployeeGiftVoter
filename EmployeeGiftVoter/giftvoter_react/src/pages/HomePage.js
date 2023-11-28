@@ -23,6 +23,7 @@ export default function HomePage(){
                     Id={e.id}
                     UserName={e.username}
                     DateOfBirth={e.dateOfBirt}
+                    ImgUrl={e.imgUrl}
                     key={e.id}/>)}
                    
                    

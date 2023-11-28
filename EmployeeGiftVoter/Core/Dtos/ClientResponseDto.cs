@@ -14,5 +14,6 @@ namespace Core.Dtos
         public string Username { get; set; }
         public string DateOfBirt { get; set; }
         public  string  AccessToken { get; set; }
+        public string ImgUrl { get; set; }
     }
 }
