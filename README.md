@@ -24,11 +24,15 @@
 
 -The purpose of the development is to realize a choice of a birthday present for an employee of
 organization.
+
 Employees (with date of birth, employee name; username, password) are
 preset (in database). Possible gifts are in advance
 set (at the database level).
+
 The application functionalities to be implemented are as follows:
+
 • Start voting to choose a gift.
+
 Any user of the app can start a gift vote for another
 employee for his upcoming birthday (no matter how long until then).
 Started voting is visible to all users except
@@ -36,10 +40,12 @@ the birthday boy.
 There cannot be more than one vote for a birthday boy at the same time.
 There cannot be more than one date of birth vote for the same year for
 birthday boy
+
 • Voting for a gift proposal.
 In one vote, everyone (except the birthday person) can vote only once
 and precisely for one of the gift suggestions for a specific birthday boy.
 • Termination of voting.
+
 The one who started the voting can stop it when he thinks. After
 termination can be traced by anyone (except the birthday person) what they are
 the voting results, as well as who voted for what and who did not vote
