@@ -5,7 +5,7 @@
 ------Api Installation-----------
 
 1.Clone the repository.
- 
+  
 2.Change your connection string in appsettings.json
 
 3.Run Update-Database in package-manager console. 
